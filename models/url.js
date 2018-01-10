@@ -8,7 +8,10 @@ const urlSchema = new Schema({
     required: true,
     default: shortid.generate,
   },
-  long_url: String,
+  long_url: {
+    type: String,
+    required: true,
+  },
   created_at: Date,
 });
 const Url = mongoose.model('Url', urlSchema);

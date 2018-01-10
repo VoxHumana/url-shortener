@@ -1,12 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
+const getIndex = require('./getIndex');
 
 /* GET home page. */
-router.get('/', (req, res) => {
-  res.json({
-    message: 'Hello and welcome to my url shortener!',
-  });
-});
+router.get('/', getIndex);
 
 module.exports = router;
