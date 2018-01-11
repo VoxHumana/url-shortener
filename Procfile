@@ -1,1 +1,1 @@
-web: SET NODE_ENV=production && node ./bin/www
+web: NODE_ENV=production && node ./bin/www
