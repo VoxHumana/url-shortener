@@ -16,7 +16,7 @@ describe('URL shortening', () => {
     Url.findOne.restore();
   });
 
-  it('when url already exists, should return short url in response', () => {
+  it('when url already exists, should return short url in response', async () => {
     const req = {
       body: {
         url: 'http://longUrl.com',
@@ -25,18 +25,19 @@ describe('URL shortening', () => {
 
     const res = {
       send: sinon.spy(),
+      status: sinon.spy(),
     };
 
     const spy = res.send;
 
-    findOneStub.yields(null, {_id: 'expectedId'});
+    findOneStub.resolves({_id: 'expectedId'});
 
-    getOrCreateUrl(req, res);
-    spy.calledOnce.should.be.equal(true);
-    sinon.assert.calledWith(spy, {shortUrl: `${process.env.WEBHOST}expectedId`});
+    await getOrCreateUrl(req, res);
+    res.send.calledOnce.should.be.equal(true);
+    res.status.calledOnce.should.be.equal(true);
   });
 
-  it('when url does not exist, should create new short url and return in response', () => {
+  it('when url does not exist, should create new short url and return in response', async () => {
     const req = {
       body: {
         url: 'http://longUrl.com',
@@ -46,15 +47,13 @@ describe('URL shortening', () => {
     const res = {
       send: sinon.spy(),
     };
-    const sendSpy = res.send;
 
     Url.save = sinon.spy();
-    const saveSpy = Url.save;
 
-    findOneStub.yields(null, null);
+    findOneStub.resolves(null);
 
-    getOrCreateUrl(req, res);
-    sendSpy.calledOnce.should.be.equal(true);
-    saveSpy.calledOnce.should.be.equal(true);
+    await getOrCreateUrl(req, res);
+    Url.save.calledOnce.should.be.equal(true);
+    res.send.calledOnce.should.be.equal(true);
   });
 });

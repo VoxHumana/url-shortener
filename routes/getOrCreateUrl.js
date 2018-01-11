@@ -1,12 +1,19 @@
 const Url = require('../models/url');
 const shortid = require('shortid');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   const longUrl = req.body.url;
 
-  Url.findOne({long_url: longUrl}, (err, doc) => {
-    if (doc) {
-      res.send({shortUrl: `${process.env.WEBHOST}${doc._id}`});
+  try {
+    let url = await Url.findOne({long_url: longUrl});
+
+    if (url) {
+      res.status(200);
+      res.send({
+        message: `Shortened URL retrieved for ${url.long_url}`,
+        shortUrl: `${process.env.WEBHOST}${url._id}`,
+        date: `${url.created_at}`,
+      });
     } else {
       const uuid = shortid.generate();
       const newUrl = Url({
@@ -15,12 +22,15 @@ module.exports = (req, res) => {
         created_at: new Date(),
       });
 
-      newUrl.save((error, document) => {
-        if (error) {
-          console.error(error);
-        }
-        res.send({shortUrl: `${process.env.WEBHOST}${document._id}`});
+      url = await newUrl.save();
+      res.status(200);
+      res.send({
+        message: `Shortened URL created for ${url.long_url}`,
+        shortUrl: `${process.env.WEBHOST}${url._id}`,
+        date: `${url.created_at}`,
       });
     }
-  });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
