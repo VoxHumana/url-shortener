@@ -7,5 +7,17 @@ body {
 body {
     color: #fff;
     text-align: center;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.kitteh {
+    padding: 60px 40px 20px 40px;
+}
+
+.icon-container {
+    padding: 20px;
+}
+
+.caption-text {
+    padding: 20px;
 }

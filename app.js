@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', index);
-app.get('/:short_id', redirect);
+app.get('/s/:suffix', redirect);
 app.post('/api/shorten', shorten);
 
 module.exports = app;

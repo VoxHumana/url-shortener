@@ -8,8 +8,32 @@ html(lang='en')
              rel='stylesheet'
              integrity='sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy'
              crossorigin='anonymous')
-        link(href='public/css/styles.css' rel='stylesheet')
+        link(href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet")
+        link(href='css/styles.css' type='text/css' rel='stylesheet')
+        script(src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous")
+        script(src='js/index.js')
+
 
     body
-        div.wrapper
-            p This should be in the middle?
+        div.container
+            div.container
+                div.row
+                    div.col-12
+                        div.text-center
+                            img.kitteh.rounded-circle.img-responsive.center-block(src='http://lorempixel.com/400/400/cats/')
+                div.row
+                    div.col-12
+                        div.icon-container.text-center
+                            i.fas.fa-paw.fa-5x
+                div.row
+                    div.col-12
+                        div.caption-text.text-center
+                            span
+                                h4 Make your URL shorter with cats!
+                div.row
+                    div.col-12
+                        div.input-group.input-group-lg
+                            input.form-control(id='url-input' type='text' placeholder='Paste long URL here' aria-label='Paste long URL here' aria-describedby='inputGroup-sizing-lg')
+                            div.input-group-append
+                                button.btn.btn-outline-secondary(id='submit-url-btn' type='button') Shorten!

@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
       res.status(200);
       res.send({
         message: `URL retrieved for ${url.original}`,
-        url: `${process.env.WEBHOST}${url.suffix}`,
+        url: `${process.env.WEBHOST}s/${url.suffix}`,
         created: url.created,
       });
     } else {
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
       res.status(200);
       res.send({
         message: `URL created for ${url.original}`,
-        url: `${process.env.WEBHOST}${url.suffix}`,
+        url: `${process.env.WEBHOST}s/${url.suffix}`,
         created: url.created,
       });
     }
