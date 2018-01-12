@@ -3,17 +3,18 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const urlSchema = new Schema({
-  _id: {
+  suffix: {
     type: String,
     required: true,
+    unique: true,
     default: shortid.generate,
   },
-  long_url: {
+  original: {
     type: String,
     required: true,
   },
-  created_at: Date,
-});
+}, { timestamps: true });
+
 const Url = mongoose.model('Url', urlSchema);
 
 module.exports = Url;

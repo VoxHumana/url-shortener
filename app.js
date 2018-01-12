@@ -13,6 +13,9 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
+db.on('connected', () => {
+  console.log(`Mongoose connection success - ${process.env.MONGODB_URI}`);
+});
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(logger('dev'));

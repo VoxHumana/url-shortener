@@ -2,35 +2,36 @@ const Url = require('../models/url');
 const shortid = require('shortid');
 
 module.exports = async (req, res) => {
-  const longUrl = req.body.url;
+  const original = req.body.url;
 
   try {
-    let url = await Url.findOne({long_url: longUrl});
+    let url = await Url.findOne({ original });
 
     if (url) {
       res.status(200);
       res.send({
-        message: `Shortened URL retrieved for ${url.long_url}`,
-        shortUrl: `${process.env.WEBHOST}${url._id}`,
-        date: `${url.created_at}`,
+        message: `URL retrieved for ${url.original}`,
+        url: `${process.env.WEBHOST}${url.suffix}`,
+        created: url.created,
       });
     } else {
-      const uuid = shortid.generate();
       const newUrl = Url({
-        _id: uuid,
-        long_url: longUrl,
-        created_at: new Date(),
+        suffix: shortid.generate(),
+        original,
       });
 
       url = await newUrl.save();
       res.status(200);
       res.send({
-        message: `Shortened URL created for ${url.long_url}`,
-        shortUrl: `${process.env.WEBHOST}${url._id}`,
-        date: `${url.created_at}`,
+        message: `URL created for ${url.original}`,
+        url: `${process.env.WEBHOST}${url.suffix}`,
+        created: url.created,
       });
     }
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500);
+    res.send({
+      error: "Something's wrong, fix it right meow! (ﾐⓛᆽⓛﾐ)✧",
+    });
   }
 };

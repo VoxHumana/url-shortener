@@ -30,7 +30,7 @@ describe('URL shortening', () => {
 
     const spy = res.send;
 
-    findOneStub.resolves({_id: 'expectedId'});
+    findOneStub.resolves({suffix: 'expectedId'});
 
     await getOrCreateUrl(req, res);
     res.send.calledOnce.should.be.equal(true);
