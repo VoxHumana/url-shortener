@@ -3,8 +3,9 @@
     <envs>
       <env name="DEBUG" value="urlShortener:*" />
       <env name="WEBHOST" value="http://localhost:3000/" />
-      <env name="DB_HOST" value="localhost:27017" />
+      <env name="MONGODB_URI" value="mongo://localhost:27017/" />
       <env name="DB_NAME" value="url_shortener" />
+      <env name="PORT" value="3000" />
     </envs>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser url="http://localhost:3000/" />

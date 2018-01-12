@@ -9,7 +9,11 @@ const redirect = require('./routes/redirect');
 
 const app = express();
 
-mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`);
+mongoose.connect(process.env.MONGODB_URI);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
