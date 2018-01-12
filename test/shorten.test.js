@@ -1,6 +1,6 @@
 const chai = require('chai');
 const sinon = require('sinon');
-const getOrCreateUrl = require('../routes/getOrCreateUrl');
+const getOrCreateUrl = require('../controllers/getOrCreateUrl');
 const Url = require('../models/url');
 
 const should = chai.should();

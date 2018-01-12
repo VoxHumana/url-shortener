@@ -1,5 +1,5 @@
 const express = require('express');
-const getOrCreateUrl = require('./getOrCreateUrl');
+const getOrCreateUrl = require('../controllers/getOrCreateUrl');
 
 const router = express.Router();
 

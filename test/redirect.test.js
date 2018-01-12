@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const chai = require('chai');
 
 const should = chai.should();
-const getUrlById = require('../routes/getUrlById');
+const getUrlById = require('../controllers/getUrlById');
 
 const Url = require('../models/url');
 

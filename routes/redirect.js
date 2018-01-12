@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const getUrlById = require('./getUrlById');
+const getUrlById = require('../controllers/getUrlById');
 
 router.get('/:suffix', getUrlById);
 
