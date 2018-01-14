@@ -12,6 +12,7 @@ html(lang='en')
         link(href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet")
         link(href='css/styles.css' type='text/css' rel='stylesheet')
         script(src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous")
+        script(src='js/clipboard.min.js')
         script(src='js/index.js')
 
 
@@ -20,8 +21,8 @@ html(lang='en')
             div.container
                 div.row
                     div.col-12
-                        div.text-center
-                            img.kitteh.rounded-circle.img-responsive.center-block(src='http://lorempixel.com/400/400/cats/')
+                        div#kitteh-container.text-center
+                            img#kitteh.rounded-circle.img-responsive.center-block(src='http://lorempixel.com/400/400/cats/')
                 div.row
                     div.col-12
                         div.icon-container.text-center
@@ -30,10 +31,21 @@ html(lang='en')
                     div.col-12
                         div.caption-text.text-center
                             span
-                                h4 Make your URL shorter with cats!
+                                h4 Shorter URLs with cats!
                 div.row
                     div.col-12
                         div.input-group.input-group-lg
-                            input.form-control(id='url-input' type='text' placeholder='Paste long URL here' aria-label='Paste long URL here' aria-describedby='inputGroup-sizing-lg')
+                            input#url-input.form-control(type='text' placeholder='Paste long URL here' aria-label='Paste long URL here' aria-describedby='inputGroup-sizing-lg')
                             div.input-group-append
-                                button.btn.btn-outline-secondary(id='submit-url-btn' type='button') Shorten!
+                                button#shorten-btn.btn.btn-primary(type='button') Shorten
+                div.row
+                    div.col-12
+                        div#shorten-success-alert.alert.alert-success(role='alert')
+                            h4.alert-heading Scratch scratch scratch...
+                            p Here's your new URL scratched down by our cats!
+                            hr
+                            div.input-group.input-group-lg.shortened-url-container
+                                input#ret-url.form-control(type='text' aria-describedby='inputGroup-sizing-lg')
+                                div.input-group-append
+                                    button#copy-btn.btn.btn-light(type='button' data-clipboard-target='#ret-url')
+                                            i.far.fa-copy.fa-lg
